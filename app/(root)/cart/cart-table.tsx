@@ -30,7 +30,13 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
       <h1 className="py-4 h2-bold">Shopping Cart</h1>
       {!cart || cart.items.length === 0 ? (
         <div>
-          Cart is empty. <Link href="/">Continue Shopping</Link>
+          Cart is empty.{" "}
+          <Link
+            href="/"
+            className="px-2 text-blue-500 hover:text-blue-700 hover:underline"
+          >
+            Continue Shopping →
+          </Link>
         </div>
       ) : (
         <div className="grid md:grid-cols-4 md:gap-5">

@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import qs from "query-string";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -17,7 +18,6 @@ export function formatNumberWithDecimal(num: number): string {
 }
 
 // Format errors
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function formatError(error: any) {
   if (error.name === "ZodError") {
     // Handle Zod error
@@ -69,6 +69,13 @@ export function formatCurrency(amount: number | string | null) {
   }
 }
 
+// Format Number
+const NUMBER_FORMATTER = new Intl.NumberFormat("en-Us");
+
+export function formatNumber(number: number) {
+  return NUMBER_FORMATTER.format(number);
+}
+
 // Shorten UUID
 export function formatId(id: string) {
   return `..${id.substring(id.length - 6)}`;
@@ -113,3 +120,28 @@ export const formatDateTime = (dateString: Date) => {
     timeOnly: formattedTime,
   };
 };
+
+// Form the pagination links
+export function formUrlQuery({
+  params,
+  key,
+  value,
+}: {
+  params: string;
+  key: string;
+  value: string | null;
+}) {
+  const query = qs.parse(params); // Parse the query string into an object
+
+  query[key] = value; // Update the query object with the new page value
+
+  return qs.stringifyUrl(
+    {
+      url: window.location.pathname, // Keep the current page URL
+      query, // Attach the updated query parameters
+    },
+    {
+      skipNull: true, // Remove any keys with `null` values
+    }
+  );
+}
