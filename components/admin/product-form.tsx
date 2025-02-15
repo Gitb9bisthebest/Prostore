@@ -25,7 +25,6 @@ import { UploadButton } from "@/lib/uploadthing";
 import { Card, CardContent } from "../ui/card";
 import { Checkbox } from "../ui/checkbox";
 import Image from "next/image";
-import { Upload } from "lucide-react";
 
 const ProductForm = ({
   type,
@@ -282,7 +281,7 @@ const ProductForm = ({
                           onUploadError={(error: Error) => {
                             toast({
                               variant: "destructive",
-                              description: `ERROR! &{error.message}`,
+                              description: `ERROR! ${error.message}`,
                             });
                           }}
                         />
@@ -333,7 +332,7 @@ const ProductForm = ({
                   onUploadError={(error: Error) => {
                     toast({
                       variant: "destructive",
-                      description: `ERROR! &{error.message}`,
+                      description: `ERROR! ${error.message}`,
                     });
                   }}
                 />
