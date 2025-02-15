@@ -15,7 +15,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Charts from "./charts";
 
-export const metada: Metadata = {
+export const metadata: Metadata = {
   title: "Admin Dashboard",
 };
 
